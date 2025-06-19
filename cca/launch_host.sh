@@ -2,7 +2,7 @@
 
 set -e
 
-$QEMU_BUILD_DIR/build/qemu-system-aarch64 \
+$QEMU_WORKDIR/build/qemu-system-aarch64 \
 -M virt,virtualization=on,secure=on,gic-version=3 \
 -M acpi=off -cpu max,x-rme=on,sme=off,pauth-impdef=on \
 -m 3G -smp 4 \
