@@ -45,7 +45,7 @@ mkfs.ext4 -F $IMAGE_NAME || exit 1
 # Check if the directory exists
 if [ -d $UBUNTU_FS_WORKDIR ]; then
     echo "Directory $UBUNTU_FS_WORKDIR exists. Deleting its contents..."
-    rm -rf $UBUNTU_FS_WORKDIR
+    rm -rf $UBUNTU_FS_WORKDIR/*
 else
     echo "Directory $UBUNTU_FS_WORKDIR does not exist. Creating the directory..."
     mkdir $UBUNTU_FS_WORKDIR
@@ -90,7 +90,7 @@ mount -t proc /proc "$UBUNTU_FS_WORKDIR"/proc
 mount -t sysfs /sys "$UBUNTU_FS_WORKDIR"/sys
 mount -o bind /dev "$UBUNTU_FS_WORKDIR"/dev
 mount -o bind /dev/pts "$UBUNTU_FS_WORKDIR"/dev/pts
-chroot "$UBUNTU_FS_WORKDIR" /bin/bash -c "DEBIAN_FRONTEND=noninteractive apt update -y" || exit 1
+chroot "$UBUNTU_FS_WORKDIR" /bin/bash -c "DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt update -y" || exit 1
 
 # Create a new user with sudo privileges
 echo "Creating user $OS_USER with sudo privileges..."
@@ -153,6 +153,15 @@ echo "Install other essential components, in case of booting blocking at /dev/hv
 chroot $UBUNTU_FS_WORKDIR /bin/bash -c "apt install vim bash-completion net-tools iputils-ping ifupdown ethtool ssh rsync udev htop rsyslog curl openssh-server apt-utils dialog nfs-common psmisc language-pack-en-base sudo kmod apt-transport-https -y" || exit 1
 chroot $UBUNTU_FS_WORKDIR /bin/bash -c "echo 'kata-ubuntu-host' | sudo tee /etc/hostname" || exit 1
 
+chroot $UBUNTU_FS_WORKDIR /bin/bash -c "cat >> /etc/network/interfaces.d/eth0.conf <<EOF
+auto enp0s1
+iface enp0s1 inet static
+    address 192.168.122.22
+    netmask 255.255.255.0
+    gateway 192.168.122.1
+    dns-nameservers 8.8.8.8
+EOF"
+
 # Unmount the mounted directory
 echo "Unmounting the mounted directory $UBUNTU_FS_WORKDIR ..."
 umount $UBUNTU_FS_WORKDIR/proc
@@ -161,4 +170,4 @@ umount $UBUNTU_FS_WORKDIR/dev/pts
 umount $UBUNTU_FS_WORKDIR/dev
 umount $UBUNTU_FS_WORKDIR
 
-echo "Operation completed!"
+echo "Build the ubuntu filesystem Operation completed!"
