@@ -2,7 +2,7 @@
 
 set -e
 
-IMAGE_NAME=${IMAGE_NAME:-ubuntu-24}
+IMAGE_NAME=${IMAGE_NAME:-ubuntu-24.img}
 UBUNTU_FS_WORKDIR=${UBUNTU_FS_WORKDIR:-ubuntu_fs}
 OS_USER=${OS_USER:-linaro}
 OS_PASSWD=${OS_PASSWD:-linaro}

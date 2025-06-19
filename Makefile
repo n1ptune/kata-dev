@@ -30,6 +30,10 @@ host_firmware:
 	@echo "Build Host Firmware"
 	bash ./cca/build_host_firmware.sh
 
+run_host:
+	@echo "Launch the Kata Host"
+	bash ./cca/launch_host.sh
+
 clean:
 	@echo "Cleaning up work directory: $(WORK_DIRECTORY)"
 	if [ -d "$(UBUNTU_FS_WORKDIR)" ]; then rm -rf "$(UBUNTU_FS_WORKDIR)"; fi
