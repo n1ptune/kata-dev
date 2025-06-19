@@ -90,7 +90,7 @@ mount -t proc /proc "$UBUNTU_FS_WORKDIR"/proc
 mount -t sysfs /sys "$UBUNTU_FS_WORKDIR"/sys
 mount -o bind /dev "$UBUNTU_FS_WORKDIR"/dev
 mount -o bind /dev/pts "$UBUNTU_FS_WORKDIR"/dev/pts
-chroot "$UBUNTU_FS_WORKDIR" /bin/bash -c "apt update -y" || exit 1
+chroot "$UBUNTU_FS_WORKDIR" /bin/bash -c "DEBIAN_FRONTEND=noninteractive apt update -y" || exit 1
 
 # Create a new user with sudo privileges
 echo "Creating user $OS_USER with sudo privileges..."
@@ -151,6 +151,7 @@ chroot $UBUNTU_FS_WORKDIR /bin/bash -c "ln -s /lib/systemd/systemd /sbin/init" |
 
 echo "Install other essential components, in case of booting blocking at /dev/hvc0 failed to bring up"
 chroot $UBUNTU_FS_WORKDIR /bin/bash -c "apt install vim bash-completion net-tools iputils-ping ifupdown ethtool ssh rsync udev htop rsyslog curl openssh-server apt-utils dialog nfs-common psmisc language-pack-en-base sudo kmod apt-transport-https -y" || exit 1
+chroot $UBUNTU_FS_WORKDIR /bin/bash -c "echo 'kata-ubuntu-host' | sudo tee /etc/hostname" || exit 1
 
 # Unmount the mounted directory
 echo "Unmounting the mounted directory $UBUNTU_FS_WORKDIR ..."

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -e
 
 QEMU_BUILD_DIR=${QEMU_BUILD_DIR:-qemu_cca_host}
 

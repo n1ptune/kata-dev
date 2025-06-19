@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -e
 
 KERNEL_WORKDIR=${KERNEL_WORKDIR:-linux_kata_host}
 

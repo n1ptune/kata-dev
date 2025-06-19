@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -e
 
 TF_RMM_BUILD_DIR=${TF_RMM_BUILD_DIR:-tf-rmm}
 TF_A_BUILD_DIR=${TF_A_BUILD_DIR:-trusted-firmware-a}
