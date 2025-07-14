@@ -30,6 +30,10 @@ host_firmware:
 	@echo "Build Host Firmware"
 	bash ./cca/build_host_firmware.sh
 
+build_kata:
+	@echo "Build Kata and CoCo Components"
+	bash ./cca/build_kata_cca_components.sh
+
 run_host:
 	@echo "Launch the Kata Host"
 	bash ./cca/launch_host.sh
