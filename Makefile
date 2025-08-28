@@ -38,6 +38,14 @@ run_host:
 	@echo "Launch the Kata Host"
 	bash ./cca/launch_host.sh
 
+kataci-kubeadm-setup:
+	@echo "Launch the Kata CI Kubeadm"
+	sudo -E bash ./kataci/configure-install-kubeadm.sh
+
+kataci-kubeadm-install:
+	@echo "Launch the Kata CI Kubeadm AIO test node"
+	sudo -E bash ./kataci/set-up-k8s.sh
+
 clean:
 	@echo "Cleaning up work directory: $(WORK_DIRECTORY)"
 	if [ -d "$(UBUNTU_FS_WORKDIR)" ]; then rm -rf "$(UBUNTU_FS_WORKDIR)"; fi
