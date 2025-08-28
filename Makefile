@@ -38,11 +38,11 @@ run_host:
 	@echo "Launch the Kata Host"
 	bash ./cca/launch_host.sh
 
-kataci-kubeadm-setup:
+kataci-kubeadm-install:
 	@echo "Launch the Kata CI Kubeadm"
 	sudo -E bash ./kataci/configure-install-kubeadm.sh
 
-kataci-kubeadm-install:
+kataci-k8s-setup:
 	@echo "Launch the Kata CI Kubeadm AIO test node"
 	sudo -E bash ./kataci/set-up-k8s.sh
 
