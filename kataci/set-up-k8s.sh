@@ -25,7 +25,8 @@ sysctl --system
 
 # flannel 要求指定该 pod-network-cidr
 # 指定 image-repository 以使用国内镜像
-kubeadm init --pod-network-cidr=10.244.0.0/16 --image-repository registry.cn-hangzhou.aliyuncs.com/google_containers
+#kubeadm init -v=5 --pod-network-cidr=10.244.0.0/16 --image-repository registry.cn-hangzhou.aliyuncs.com/google_containers
+kubeadm init -v=5 --pod-network-cidr=10.244.0.0/16
 
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
