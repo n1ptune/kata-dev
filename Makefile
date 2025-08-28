@@ -31,7 +31,7 @@ host_firmware:
 	bash ./cca/build_host_firmware.sh
 
 build_kata:
-	@echo "Build Kata and CoCo Components"
+	@echo "Build Kata and CoCo Components and generate Kata release file(runtime Go)"
 	bash ./cca/build_kata_cca_components.sh
 
 run_host:
