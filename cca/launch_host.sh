@@ -25,4 +25,4 @@ $QEMU_WORKDIR/build/qemu-system-aarch64 \
 -net nic,macaddr=52:54:30:12:34:63 \
 -net tap,ifname=tap1,script=no,downscript=no \
 -device virtio-9p-device,fsdev=shr0,mount_tag=shr0 \
--fsdev local,security_model=none,path=../../,id=shr0
+-fsdev local,security_model=none,path=.,id=shr0
